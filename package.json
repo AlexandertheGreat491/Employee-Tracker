@@ -1,0 +1,24 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "employee tracker program",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexandertheGreat491/Employee-Tracker.git"
+  },
+  "keywords": [
+    "employee",
+    "tracker"
+  ],
+  "author": "Alex Van Dyke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexandertheGreat491/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/AlexandertheGreat491/Employee-Tracker#readme"
+}
