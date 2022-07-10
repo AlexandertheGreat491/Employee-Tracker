@@ -31,12 +31,21 @@ app.get("/api/departments", (req, res) => {
 });
 
 //GET a single department
-//db.query(`SELECT * FROM departments WHERE id =1`, (err, row) => {
-//if (err) {
-//console.log(err);
-//}
-//console.log(row);
-//});
+app.get("/api/department/:id", (req, res) => {
+  const sql = `SELECT * FROM departments WHERE id = ?`;
+  const params = [req.params.id];
+
+  db.query(sql, params, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: row,
+    });
+  });
+});
 
 //Delete a department
 //db.query(`DELETE FROM candidates WHERE id = ?`, 1, (err, result) => {
@@ -60,9 +69,9 @@ app.get("/api/departments", (req, res) => {
 
 //test route for the server
 //app.get("/", (req, res) => {
-  //res.json({
-    //message: "Hello World",
-  //});
+//res.json({
+//message: "Hello World",
+//});
 //});
 
 // The default response for any other request.
