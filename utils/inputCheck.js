@@ -5,7 +5,7 @@ module.exports = function (obj, ...props) {
 
   props.forEach((prop) => {
     //when property is blank or doesn't exist, it will be added to the errors array
-    if (obj[prop] === undefiend || obj[prop] === "") {
+    if (obj[prop] === undefined || obj[prop] === "") {
       errors.push(`No ${prop} specified.`);
     }
   });
