@@ -1,2 +1,2 @@
-CREATE DATABASE employee manager;
-USE employee manager;
+CREATE DATABASE employee;
+USE employee;
