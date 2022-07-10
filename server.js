@@ -13,3 +13,8 @@ app.use(express.json());
 
 //Directs the app to use apiRoutes
 app.use('/api', apiRoutes);
+
+// The default response for any other request.
+app.use((req, res) => {
+    res.status(404).end();
+})
