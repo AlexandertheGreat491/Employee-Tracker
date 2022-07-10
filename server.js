@@ -19,6 +19,13 @@ app.use((req, res) => {
   res.status(404).end();
 });
 
+//test route for the server
+//app.get("/", (req, res) => {
+  //res.json({
+    //message: "Hello World",
+  //});
+//});
+
 // Server is started after a database connection
 db.connect((err) => {
   if (err) throw err;
