@@ -34,11 +34,24 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
+Collaborators:
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
 
-If you followed tutorials, include links to those here as well.
+Tutorials:
+
+[Jest](https://jestjs.io/docs/getting-started)
+
+[MySQL Reference Guide](https://coding-boot-camp.github.io/full-stack/mysql/mysql-reference-guide)
+
+[NPM console.table](https://www.npmjs.com/package/console.table)
+
+[NPM mysql2](https://www.npmjs.com/package/mysql2#installation)
+
+[NPM express](https://www.npmjs.com/package/express)
+
+[Professional README Guide](https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide)
+
+[Video Submission Guide](https://coding-boot-camp.github.io/full-stack/computer-literacy/video-submission-guide)
 
 ## License
 
