@@ -48,12 +48,26 @@ app.get("/api/department/:id", (req, res) => {
 });
 
 //Delete a department
-//db.query(`DELETE FROM candidates WHERE id = ?`, 1, (err, result) => {
-//if (err) {
-//console.log(err);
-//}
-//console.log(result);
-//});
+app.delete("/api/department/:id", (req, res) => {
+  const sql = `DELETE FROM departments WHERE ID = ?`;
+  const params = [req.params.id];
+
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.statusMessage(400).json({ error: res.message });
+    } else if (!result.affectedRows) {
+      res.json({
+        message: "Department not found",
+      });
+    } else {
+      res.json({
+        message: "deleted",
+        changes: result.affectedRows,
+        id: req.params.id,
+      });
+    }
+  });
+});
 
 //Create a department
 //const sql = `INSERT INTO departments (id, name)
