@@ -19,11 +19,6 @@ db.query(`SELECT * FROM departments`, (err, rows) => {
   console.log(rows);
 });
 
-// The default response for any other request.
-app.use((req, res) => {
-  res.status(404).end();
-});
-
 //GET a single department
 db.query(`SELECT * FROM departments WHERE id =1`, (err, row) => {
   if (err) {
@@ -58,6 +53,11 @@ db.query(sql, params, (err, result) => {
 //message: "Hello World",
 //});
 //});
+
+// The default response for any other request.
+app.use((req, res) => {
+  res.status(404).end();
+});
 
 // Server is started after a database connection
 db.connect((err) => {
