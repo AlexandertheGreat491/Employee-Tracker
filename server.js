@@ -9,3 +9,6 @@ const app = express();
 //Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+//Directs the app to use apiRoutes
+app.use('/api', apiRoutes);
