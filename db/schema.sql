@@ -8,7 +8,6 @@ CREATE TABLE roles(
     title VARCHAR(30),
     salary DECIMAL,
     department_id INT
-    
 );
 
 
