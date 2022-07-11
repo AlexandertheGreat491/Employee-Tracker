@@ -17,7 +17,11 @@ app.use(express.json());
 
 //All departments
 app.get("/api/departments", (req, res) => {
-  const sql = `SELECT * FROM departments`;
+  const sql = `SELECT * FROM departments.*, roles.name
+                AS role_name
+                FROM departments
+                RIGHT JOIN roles
+                ON roles.departments_id = roles.id`;
 
   db.query(sql, (err, rows) => {
     if (err) {
