@@ -17,3 +17,15 @@ VALUES
 ('Accountant', 125000, 3),
 ('Legal Team Lead', 250000, 4),
 ('Lawyer', 190000, 4);
+
+/*employees table values*/
+INSERT INTO employees (first_name, last_name, roles_id, manager_id)
+VALUES
+('John', 'Doe', 1, null),
+('Mike', 'Chan', 1, 1),
+('Ashley', 'Rodriguez', 2, null),
+('Kevin', 'Tupik', 2, 3),
+('Kunal', 'Singh', 3, null),
+('Malia', 'Brown', 3, 3),
+('Sarah', 'Lourd', 4, null),
+('Tom', 'Allen', 4, 4);
