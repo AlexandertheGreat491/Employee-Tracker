@@ -4,8 +4,11 @@ CREATE TABLE departments(
 );
 
 CREATE TABLE roles(
-    roles_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) NOT NULL
+    id INT PRIMARY KEY,
+    title VARCHAR(30),
+    salary DECIMAL,
+    department_id INT
+    
 );
 
 
