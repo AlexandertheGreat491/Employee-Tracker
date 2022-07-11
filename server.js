@@ -15,6 +15,8 @@ app.use(express.json());
 //Directs the app to use apiRoutes
 //app.use("/api", apiRoutes);
 
+//departments/department routes
+
 //All departments
 app.get("/api/departments", (req, res) => {
   const sql = `SELECT * FROM departments.*, roles.name
@@ -81,10 +83,7 @@ app.delete("/api/department/:id", (req, res) => {
 
 //Create a department
 app.post("/api/department", ({ body }, res) => {
-  const errors = inputCheck(
-    body, 
-    "id", 
-    "name");
+  const errors = inputCheck(body, "id", "name");
   if (errors) {
     res.status(400).json({ error: errors });
     return;
@@ -112,6 +111,39 @@ app.post("/api/department", ({ body }, res) => {
 //message: "Hello World",
 //});
 //});
+
+//role/roles routes
+
+//All roles
+app.get("/api/roles", (req, res) => {
+  const sql = "SELECT * FROM roles";
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: rows,
+    });
+  });
+});
+
+//route for a single role
+app.get("/api/role/:id", (req, res) => {
+  const sql = `SELECT * FROM roles WHERE id =?`;
+  const params = [req.params.id];
+  db.query(sql, params, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: row
+    })
+  });
+});
 
 // The default response for any other request.
 app.use((req, res) => {
