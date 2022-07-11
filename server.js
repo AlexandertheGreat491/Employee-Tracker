@@ -139,9 +139,31 @@ app.get("/api/role/:id", (req, res) => {
       return;
     }
     res.json({
-      message: 'success',
-      data: row
-    })
+      message: "success",
+      data: row,
+    });
+  });
+});
+
+//route to delete a role
+app.delete("/api/role/:id", (req, res) => {
+  const sql = `DELETE FROM roles WHERE id = ?`;
+  const params = [req.params.id];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: res.message });
+      // this will check if anything was deleted
+    } else if (!result.affectedRows) {
+      res.json({
+        message: "Role not found",
+      });
+    } else {
+      res.json({
+        message: "deleted",
+        changes: result.affectedRows,
+        id: req.params.id,
+      });
+    }
   });
 });
 
