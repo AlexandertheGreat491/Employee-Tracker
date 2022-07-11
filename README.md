@@ -39,6 +39,8 @@ Collaborators:
 
 Tutorials:
 
+[Comments within SQL Statements](https://docs.oracle.com/cd/B13789_01/server.101/b10759/sql_elements006.htm#:~:text=You%20can%20include%20a%20comment%20in%20a%20statement%20in%20two,text%20can%20span%20multiple%20lines.)
+
 [Jest](https://jestjs.io/docs/getting-started)
 
 [MySQL](https://dev.mysql.com/doc/refman/8.0/en/rename-table.html)
