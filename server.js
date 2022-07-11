@@ -37,7 +37,12 @@ app.get("/api/departments", (req, res) => {
 
 //GET a single department
 app.get("/api/department/:id", (req, res) => {
-  const sql = `SELECT * FROM departments WHERE id = ?`;
+  const sql = `SELECT * FROM departments.*, roles.name
+               AS role_name
+               FROM departments
+               RIGHT JOIN roles
+               ON roles.departments_id = roles.id
+               WHERE departments.id = ?`;
   const params = [req.params.id];
 
   db.query(sql, params, (err, row) => {
