@@ -167,7 +167,29 @@ app.delete("/api/role/:id", (req, res) => {
   });
 });
 
-// Update an employee's role route
+// Update a department route
+// test this route later
+app.put("/api/department/:id", (req, res) => {
+  const sql = `UPDATE departments SET department_id = ?
+               WHERE id = ?`;
+  const params = [req.body.deparments_id, req.params.id];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      // This will check if a record was found.
+    } else if (!result.affectedRows) {
+      res.json({
+        message: "Department not found",
+      });
+    } else {
+      res.json({
+        message: "success",
+        data: req.body,
+        changes: result.affectedRows,
+      });
+    }
+  });
+});
 
 // The default response for any other request.
 app.use((req, res) => {
