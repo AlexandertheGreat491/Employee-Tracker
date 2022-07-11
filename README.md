@@ -41,6 +41,8 @@ Tutorials:
 
 [Jest](https://jestjs.io/docs/getting-started)
 
+[MySQL](https://dev.mysql.com/doc/refman/8.0/en/rename-table.html)
+
 [MySQL Reference Guide](https://coding-boot-camp.github.io/full-stack/mysql/mysql-reference-guide)
 
 [NPM console.table](https://www.npmjs.com/package/console.table)
