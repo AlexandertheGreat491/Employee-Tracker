@@ -167,6 +167,8 @@ app.delete("/api/role/:id", (req, res) => {
   });
 });
 
+// Update an employee's role route
+
 // The default response for any other request.
 app.use((req, res) => {
   res.status(404).end();
