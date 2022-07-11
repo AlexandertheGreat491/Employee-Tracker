@@ -1,4 +1,4 @@
-
+/*department table values */
 INSERT INTO department (name)
 VALUES
 ('Sales'),
@@ -6,4 +6,4 @@ VALUES
 ('Finance'),
 ('Legal');
 
-
+/*role table values*/
