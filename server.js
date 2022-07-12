@@ -13,6 +13,7 @@ const createConnection = mysql.createConnection(
     database: "employee",
   },
   console.log("Connected to the employee database.")
+  
 );
 
 // connects to sql server and sql database
@@ -20,6 +21,8 @@ createConnection.connect(function (err) {
   if (err) throw err;
   choices();
 });
+
+
 
 // prompts user with list of options to choose from
 function choices() {
