@@ -169,4 +169,26 @@ function addEmployee() {
   });
 }
 
-
+//Add a department to the database.
+function addDepartment() {
+  inquirer
+    .prompt([
+      {
+        name: "newDepartment",
+        type: "input",
+        message: "Which department would you like to add?",
+      },
+    ])
+    .then(function (response) {
+      createConnection.query("INSERT INTO departments SET ?", {
+        name: response.newDepartment,
+      });
+      let query = "SELECT * FROM departments";
+      createConnection.query(query, function (err, res) {
+        if (err) throw err;
+        console.log("A department has been added!");
+        console.table("All Departments:", res);
+        choices();
+      });
+    });
+}
