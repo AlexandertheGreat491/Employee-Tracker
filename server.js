@@ -246,3 +246,18 @@ function addRole() {
       });
   });
 }
+
+//Update a role in the database.
+function updateRole() {
+
+};
+
+//Delete an employee
+function deleteEmployee() {
+  
+};
+
+//Exit the app.
+function exitApp() {
+  createConnection.end();
+};
