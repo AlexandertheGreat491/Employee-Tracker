@@ -111,38 +111,62 @@ function viewRoles() {
 
 //Add an employee to the database.
 function addEmployee() {
-  createConnection.query('SELECT * FROM roles', function (err, res) {
+  createConnection.query("SELECT * FROM roles", function (err, res) {
     if (err) throw err;
-    inquirer.prompt([
-      {
-        name: 'first_name',
-        type: 'input',
-        message: "What is the employee's first name?",
-      },
-      {
-        name: 'last_name',
-        type: 'input',
-        message: "What is the employee's manager ID?"
-      },
-      {
-        name: 'manager_id',
-        type: 'input',
-        message: "What is the employee's manager's ID?"
-      },
-      {
-        name: 'role',
-        type: 'list',
-        choices: function() {
-          let roleArray = [];
-          for (let i = 0; i < res.length; i++) {
-            roleArray.push(res[i].title);
-          }
-          return roleArray;
+    inquirer
+      .prompt([
+        {
+          name: "first_name",
+          type: "input",
+          message: "What is the employee's first name?",
         },
-        message: "What is this employee's role?"
-      }
-    ])
-      
-    
-  })
+        {
+          name: "last_name",
+          type: "input",
+          message: "What is the employee's manager ID?",
+        },
+        {
+          name: "manager_id",
+          type: "input",
+          message: "What is the employee's manager's ID?",
+        },
+        {
+          name: "role",
+          type: "list",
+          choices: function () {
+            let roleArray = [];
+            for (let i = 0; i < res.length; i++) {
+              roleArray.push(res[i].title);
+            }
+            return roleArray;
+          },
+          message: "What is this employee's role?",
+        },
+      ])
+      .then(function (response) {
+        let roles_id;
+        for (let a = 0; a < res.length; a++) {
+          if (res[a].title == response.roles) {
+            roles_id = res[a].id;
+            console.log(roles_id);
+          }
+        }
+        createConnection.query(
+          "INSERT INTO employees SET ?",
+          {
+            first_name: response.first_name,
+            last_name: response.last_name,
+            manager_id: response.manager_id,
+            roles_id: roles_id,
+          },
+          function (err) {
+            if (err) throw err;
+            console.log("Your employee has been added!");
+            choices();
+          }
+        );
+      });
+  });
 }
+
+
