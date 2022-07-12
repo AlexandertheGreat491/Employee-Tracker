@@ -39,7 +39,6 @@ function choices() {
         "Add a department",
         "Add a role",
         "Update employee role",
-        "Delete an employee",
         "EXIT",
       ],
     })
