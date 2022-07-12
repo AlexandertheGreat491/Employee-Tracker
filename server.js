@@ -1,22 +1,8 @@
 //imported modules
-const express = require("express");
+const mysql = require('mysql2');
 const inquirer = require("inquirer");
 const db = require("./db/connection");
-const apiRoutes = require("./routes/apiRoutes");
-const inputCheck = require("./utils/inputCheck");
-const router = express.Router();
 
-const PORT = process.env.PORT || 3001;
-const app = express();
-
-//Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use('/api', apiRoutes);
-
-
-//Directs the app to use apiRoutes
-app.use("/api", apiRoutes);
 
 
 //test route for the server
