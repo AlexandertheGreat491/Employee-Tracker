@@ -167,56 +167,38 @@ function addDepartment() {
 
 //Add a role to the database.
 function addRole() {
-  createConnection.query("SELECT * FROM departments", function (err, res) {
-    if (err) throw err;
+  inquirer
+    .prompt([
+      {
+        name: "roleTitle",
+        type: "input",
+        message: "What is the employee's new title?",
+      },
+      {
+        name: "roleSalary",
+        type: "input",
+        message: "What is the salary of this role? (Enter a number)",
+      },
+      {
+        name: "roleDept",
+        type: "input",
+        message: "What is the employee's department ID?",
+      },
+    ])
 
-    inquirer
-      .prompt([
-        {
-          name: "new_role",
-          type: "input",
-          message: "What new role would you like to add?",
-        },
-        {
-          name: "salary",
-          type: "input",
-          message: "What is the salary of this role? (Enter a number)",
-        },
-        {
-          name: "Department",
-          type: "list",
-          choices: function () {
-            let deptArray = [];
-            for (let i = 0; i < res.length; i++) {
-              deptArray.push(res[i].name);
-            }
-            return deptArray;
-          },
-        },
-      ])
-      .then(function (response) {
-        let departments_id;
-        for (let a = 0; a < res.length; a++) {
-          if (res[a].name == response.Department) {
-            departments_id = res[a].id;
-          }
+    .then(function (res) {
+      const title = res.roleTitle;
+      const salary = res.roleSalary;
+      const departmentsID = res.roleDept;
+      const query = `INSERT INTO role (title, salary, departments_id) VALUES ("${title}", "${salary}", "${departmentsID}")`;
+      createConnection.query(query, function (err, res) {
+        if (err) {
+          throw err;
         }
-        createConnection.query(
-          "INSERT INTO roles SET ?",
-          {
-            title: response.new_role,
-            salary: response.salary,
-            departments_id: departments_id,
-          },
-          function (err, res) {
-            if (err) throw err;
-            console.log("Your new role has been added!");
-            console.table("All Roles:", res);
-            choices();
-          }
-        );
+        console.table(res);
+        starterMenu();
       });
-  });
+    });
 }
 
 //Update a role in the database.
