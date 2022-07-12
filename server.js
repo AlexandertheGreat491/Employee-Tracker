@@ -105,6 +105,34 @@ app.post("/api/department", ({ body }, res) => {
   });
 });
 
+// Update a department route
+app.put("/api/department/:id", (req, res) => {
+  const errors = inputCheck(req.body, "departments_id");
+  if (errors) {
+    res.status(400).json({ error: errors });
+    return;
+  }
+  const sql = `UPDATE departments SET departments_id = ?
+               WHERE id = ?`;
+  const params = [req.body.deparments_id, req.params.id];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      // This will check if a record was found.
+    } else if (!result.affectedRows) {
+      res.json({
+        message: "Department not found",
+      });
+    } else {
+      res.json({
+        message: "success",
+        data: req.body,
+        changes: result.affectedRows,
+      });
+    }
+  });
+});
+
 //test route for the server
 //app.get("/", (req, res) => {
 //res.json({
@@ -112,7 +140,7 @@ app.post("/api/department", ({ body }, res) => {
 //});
 //});
 
-//role/roles routes
+//roles routes
 
 //All roles
 app.get("/api/roles", (req, res) => {
@@ -167,14 +195,13 @@ app.delete("/api/role/:id", (req, res) => {
   });
 });
 
-// Update a department route
-app.put("/api/department/:id", (req, res) => {
-  const errors = inputCheck(req.body, "departments_id");
+app.put("/api/role/:id", (req, res) => {
+  const errors = inputCheck(req.body, "roles_id");
   if (errors) {
     res.status(400).json({ error: errors });
     return;
   }
-  const sql = `UPDATE departments SET departments_id = ?
+  const sql = `UPDATE departments SET roles_id = ?
                WHERE id = ?`;
   const params = [req.body.deparments_id, req.params.id];
   db.query(sql, params, (err, result) => {
@@ -183,7 +210,7 @@ app.put("/api/department/:id", (req, res) => {
       // This will check if a record was found.
     } else if (!result.affectedRows) {
       res.json({
-        message: "Department not found",
+        message: "Role not found",
       });
     } else {
       res.json({
