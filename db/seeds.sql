@@ -1,31 +1,34 @@
+USE employee;
+
 /*department table values */
-INSERT INTO departments (department_name)
+INSERT INTO department (department_name)
 VALUES
 ('Sales'),
 ('Engineering'),
 ('Finance'),
-('Legal');
+('Legal'),
+("Administration");
 
 /*role table values*/
-INSERT INTO roles (title, salary, departments_id)
+INSERT INTO role (title, salary, department_id)
 VALUES
-('Sales Lead', 100000, 1),
-('Salesperson', 80000, 1),
-('Lead Engineer', 150000, 2),
-('Software Engineer', 120000, 2),
-('Account Manager', 160000, 3),
-('Accountant', 125000, 3),
-('Legal Team Lead', 250000, 4),
-('Lawyer', 190000, 4);
+('Lead Engineer', 100000, 2),
+('Software Engineer', 80000, 2),
+('Sales Lead', 150000, 1),
+('Salesperson', 120000, 1),
+('Legal Team Lead', 160000, 4),
+('Lawyer', 125000, 4),
+('Accountant', 250000, 3),
+('Chief Executive Officer', 190000, 5);
 
 /*employee table values*/
-INSERT INTO employees (first_name, last_name, roles_id, manager_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
-('John', 'Doe', 1, null),
-('Mike', 'Chan', 1, 1),
-('Ashley', 'Rodriguez', 2, null),
-('Kevin', 'Tupik', 2, 3),
-('Kunal', 'Singh', 3, null),
-('Malia', 'Brown', 3, 3),
-('Sarah', 'Lourd', 4, null),
-('Tom', 'Allen', 4, 4);
+('John', 'Doe', 1, 8),
+('Mike', 'Chan', 2, 1),
+('Ashley', 'Rodriguez', 3, 8),
+('Dev', 'Patel', 4, 3),
+('Kevin', 'Tupik', 5, 8),
+('Malia', 'Brown', 6, 5),
+('Sarah', 'Lourd', 7, 8),
+('Tom', 'Allen', 8, null);
