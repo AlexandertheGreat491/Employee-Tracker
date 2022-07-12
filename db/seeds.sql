@@ -1,10 +1,10 @@
 /*department table values */
-INSERT INTO departments (id, name)
+INSERT INTO departments (department_name)
 VALUES
-(1, 'Sales'),
-(2, 'Engineering'),
-(3, 'Finance'),
-(4, 'Legal');
+('Sales'),
+('Engineering'),
+('Finance'),
+('Legal');
 
 /*role table values*/
 INSERT INTO roles (title, salary, departments_id)
@@ -18,7 +18,7 @@ VALUES
 ('Legal Team Lead', 250000, 4),
 ('Lawyer', 190000, 4);
 
-/*employees table values*/
+/*employee table values*/
 INSERT INTO employees (first_name, last_name, roles_id, manager_id)
 VALUES
 ('John', 'Doe', 1, null),

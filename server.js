@@ -2,9 +2,7 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-const { appendFile } = require("fs");
-const { options, choices } = require("yargs");
-const { allowedNodeEnvironmentFlags } = require("process");
+
 
 //Connect to the database
 const createConnection = mysql.createConnection(
@@ -76,9 +74,9 @@ function starterMenu() {
 
 //View all of the employees in the database.
 function viewAllEmployees() {
-  let query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.department_name AS department, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department on role.department_id = department.id`;
+  let query = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.department_name AS department, roles.salary FROM employees LEFT JOIN roles ON employees.roles_id = roles.id LEFT JOIN departments on roles.departments_id = departments.id`;
   createConnection.query(query, function (err, res) {
-    if (err) throw err;
+    //if (err) throw err;
     console.table(res);
     starterMenu();
   });
