@@ -98,3 +98,13 @@ function viewDepartments() {
     choices();
   });
 }
+
+//View all roles in the database
+function viewRoles() {
+  let query = `SELECT * FROM roles`;
+  createConnection.query(query, function (err, res) {
+    if (err) throw err;
+    console.table("All Roles:", res);
+    choices();
+  });
+}
