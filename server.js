@@ -108,3 +108,41 @@ function viewRoles() {
     choices();
   });
 }
+
+//Add an employee to the database.
+function addEmployee() {
+  createConnection.query('SELECT * FROM roles', function (err, res) {
+    if (err) throw err;
+    inquirer.prompt([
+      {
+        name: 'first_name',
+        type: 'input',
+        message: "What is the employee's first name?",
+      },
+      {
+        name: 'last_name',
+        type: 'input',
+        message: "What is the employee's manager ID?"
+      },
+      {
+        name: 'manager_id',
+        type: 'input',
+        message: "What is the employee's manager's ID?"
+      },
+      {
+        name: 'role',
+        type: 'list',
+        choices: function() {
+          let roleArray = [];
+          for (let i = 0; i < res.length; i++) {
+            roleArray.push(res[i].title);
+          }
+          return roleArray;
+        },
+        message: "What is this employee's role?"
+      }
+    ])
+      
+    
+  })
+}
