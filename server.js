@@ -316,8 +316,6 @@ function updateRole() {
   });
 }
 
-//  delete an employee
-function deleteEmployee() {}
 
 // exit the app
 function exitApp() {
