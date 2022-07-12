@@ -168,9 +168,13 @@ app.delete("/api/role/:id", (req, res) => {
 });
 
 // Update a department route
-// test this route later
 app.put("/api/department/:id", (req, res) => {
-  const sql = `UPDATE departments SET department_id = ?
+  const errors = inputCheck(req.body, "departments_id");
+  if (errors) {
+    res.status(400).json({ error: errors });
+    return;
+  }
+  const sql = `UPDATE departments SET departments_id = ?
                WHERE id = ?`;
   const params = [req.body.deparments_id, req.params.id];
   db.query(sql, params, (err, result) => {
