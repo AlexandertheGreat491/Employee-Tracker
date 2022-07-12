@@ -196,6 +196,7 @@ app.put("/api/department/:id", (req, res) => {
 });
 
 //employees routes
+
 //route for all employees
 app.get("/api/employees", (req, res) => {
   const sql = `SELECT * FROM employees`;
@@ -225,6 +226,28 @@ app.get("/api/employee/:id", (req, res) => {
       message: "success",
       data: row,
     });
+  });
+});
+
+//route to DELETE an employee
+app.delete("/api/employee/:id", (req, res) => {
+  const sql = `DELETE FROM employees WHERE id = ?`;
+  const params = [req.params.id];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: res.message });
+      // this will check if anything was deleted
+    } else if (!result.affectedRows) {
+      res.json({
+        message: "Employee not found",
+      });
+    } else {
+      res.json({
+        message: "deleted",
+        changes: result.affectedRows,
+        id: req.params.id,
+      });
+    }
   });
 });
 
