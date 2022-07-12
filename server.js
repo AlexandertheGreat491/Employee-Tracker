@@ -21,14 +21,14 @@ const createConnection = mysql.createConnection(
 //connects to server and database
 createConnection.connect(function (err) {
   if (err) throw err;
-  choices();
+  starterMenu();
 });
 
 // User is prompted with a list of options to choose from.
-function choices() {
+function starterMenu() {
   inquirer
     .prompt({
-      name: "action",
+      name: "starterMenu",
       type: "list",
       message:
         "Welcome to the employee database! Please select what you would like to do.",
@@ -39,20 +39,19 @@ function choices() {
         "Add an employee",
         "Add a role",
         "Update employee role",
-        "Delete an employee",
         "EXIT",
       ],
     })
-    .then(function (response) {
-      switch (response.action) {
+    .then(function (answer) {
+      switch (answer.starterMenu) {
         case "View all employees":
-          viewEmployees();
+          viewAllEmployees();
           break;
         case "View all departments":
-          viewDepartments();
+          viewAllDepartments();
           break;
         case "View all roles":
-          viewRoles();
+          viewAllRoles();
           break;
         case "Add an employee":
           addEmployee();
@@ -66,9 +65,6 @@ function choices() {
         case "Update employee role":
           updateRole();
           break;
-        case "Delete an employee":
-          deleteEmployee();
-          break;
         case "EXIT":
           exitApp();
           break;
@@ -79,32 +75,29 @@ function choices() {
 }
 
 //View all of the employees in the database.
-function viewEmployees() {
-  let query = `SELECT * FROM employees`;
+function viewAllEmployees() {
+  let query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.department_name AS department, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department on role.department_id = department.id`;
   createConnection.query(query, function (err, res) {
     if (err) throw err;
-    console.log(res.length + "employees were found!");
-    console.table("All Employees:", res);
-    choices();
+    console.table(res);
+    starterMenu();
   });
 }
 
 //View all departments in the database.
-function viewDepartments() {
+function viewAllDepartments() {
   let query = `SELECT * FROM departments`;
   createConnection.query(query, function (err, res) {
-    if (err) throw err;
-    console.table("All Departments:", res);
-    choices();
+    console.table(res);
+    starterMenu();
   });
 }
 
 //View all roles in the database
-function viewRoles() {
+function viewAllRoles() {
   let query = `SELECT * FROM roles`;
   createConnection.query(query, function (err, res) {
-    if (err) throw err;
-    console.table("All Roles:", res);
+    console.table(res);
     choices();
   });
 }
