@@ -104,62 +104,42 @@ function viewAllRoles() {
 
 //Add an employee to the database.
 function addEmployee() {
-  createConnection.query("SELECT * FROM roles", function (err, res) {
-    if (err) throw err;
-    inquirer
-      .prompt([
-        {
-          name: "first_name",
-          type: "input",
-          message: "What is the employee's first name?",
-        },
-        {
-          name: "last_name",
-          type: "input",
-          message: "What is the employee's manager ID?",
-        },
-        {
-          name: "manager_id",
-          type: "input",
-          message: "What is the employee's manager's ID?",
-        },
-        {
-          name: "role",
-          type: "list",
-          choices: function () {
-            let roleArray = [];
-            for (let i = 0; i < res.length; i++) {
-              roleArray.push(res[i].title);
-            }
-            return roleArray;
-          },
-          message: "What is this employee's role?",
-        },
-      ])
-      .then(function (response) {
-        let roles_id;
-        for (let a = 0; a < res.length; a++) {
-          if (res[a].title == response.roles) {
-            roles_id = res[a].id;
-            console.log(roles_id);
-          }
+  inquirer
+    .prompt([
+      {
+        name: "firstName",
+        type: "input",
+        message: "What is the employee's first name?",
+      },
+      {
+        name: "lastName",
+        type: "input",
+        message: "What is the employee's last name?",
+      },
+      {
+        name: "addEmployMan",
+        type: "input",
+        message: "What is the employee's role ID?",
+      },
+      {
+        name: "addEmployRole",
+        message: "What is the employee's role ID?",
+      },
+    ])
+    .then(function (res) {
+      const firstName = res.firstName;
+      const lastName = res.lastName;
+      const employRoleID = res.addEmployRole;
+      const employManID = res.addEmployMan;
+      const query = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName}", "${employRoleID}", "${employManID}")`;
+      createConnection.query(query, function (err, res) {
+        if (err) {
+          throw err;
         }
-        createConnection.query(
-          "INSERT INTO employees SET ?",
-          {
-            first_name: response.first_name,
-            last_name: response.last_name,
-            manager_id: response.manager_id,
-            roles_id: roles_id,
-          },
-          function (err) {
-            if (err) throw err;
-            console.log("Your employee has been added!");
-            choices();
-          }
-        );
+        console.table(res);
+        starterMenu();
       });
-  });
+    });
 }
 
 //Add a department to the database.
@@ -172,16 +152,15 @@ function addDepartment() {
         message: "Which department would you like to add?",
       },
     ])
-    .then(function (response) {
-      createConnection.query("INSERT INTO departments SET ?", {
-        name: response.newDepartment,
-      });
-      let query = "SELECT * FROM departments";
+    .then(function (res) {
+      const newDepartment = res.newDept;
+      const query = `INSERT INTO departments (department_name) VALUES ("${newDepartment}")`;
       createConnection.query(query, function (err, res) {
-        if (err) throw err;
-        console.log("A department has been added!");
-        console.table("All Departments:", res);
-        choices();
+        if (err) {
+          throw err;
+        }
+        console.table(res);
+        starterMenu();
       });
     });
 }
@@ -241,16 +220,12 @@ function addRole() {
 }
 
 //Update a role in the database.
-function updateRole() {
-
-};
+function updateRole() {}
 
 //Delete an employee
-function deleteEmployee() {
-  
-};
+function deleteEmployee() {}
 
 //Exit the app.
 function exitApp() {
   createConnection.end();
-};
+}
