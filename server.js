@@ -77,3 +77,14 @@ function choices() {
       }
     });
 }
+
+//View all of the employees in the database
+function viewEmployees() {
+  let query = `SELECT * FROM employees`;
+  createConnection.query(query, function (err, res) {
+    if (err) throw err;
+    console.log(res.length + "employees were found!");
+    console.table("All Employees:", res);
+    choices();
+  });
+}
