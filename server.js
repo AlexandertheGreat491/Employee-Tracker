@@ -202,7 +202,34 @@ function addRole() {
 }
 
 //Update a role in the database.
-function updateRole() {}
+function updateRole() {
+  inquirer.prompt([
+    {
+      name: "updateEmployee",
+      type: "input",
+      message: "What is the employee's ID you want to be updated?",
+
+    },
+    {
+      name: "newRole",
+      type: "input",
+      message: "Enter the new role ID for that employee",
+
+    }
+  ])
+  .then(function (res) {
+    const updateEmployee = res.updateEmployee;
+    const newRole = res.newRole;
+    const queryUpdate = `Update employees SET roles_id = "${newRole}" WHERE id = "${updateEmploy}"`;
+    createConnection.query(queryUpdate, function (err, res) {
+      if (err) {
+        throw err;
+      }
+      console.table(res);
+      starterMenu();
+    })
+  })
+}
 
 //Delete an employee
 function deleteEmployee() {}
