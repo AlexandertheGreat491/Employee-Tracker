@@ -231,9 +231,6 @@ function updateRole() {
   })
 }
 
-//Delete an employee
-function deleteEmployee() {}
-
 //Exit the app.
 function exitApp() {
   createConnection.end();
