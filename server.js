@@ -198,7 +198,7 @@ app.put("/api/department/:id", (req, res) => {
 //employees routes
 //route for all employees
 app.get("/api/employees", (req, res) => {
-  const sql = `SELECT * FROM EMPLOYEES`;
+  const sql = `SELECT * FROM employees`;
   db.query(sql, (err, rows) => {
     if (err) {
       res.status(500).json({ error: err.message });
@@ -207,6 +207,23 @@ app.get("/api/employees", (req, res) => {
     res.json({
       message: "success",
       data: rows,
+    });
+  });
+});
+
+//route for a single employee
+app.get("/api/employee/:id", (req, res) => {
+  const sql = `SELECT * FROM roles WHERE id =?`;
+  const params = [req.params.id];
+
+  db.query(sql, params, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: row,
     });
   });
 });
