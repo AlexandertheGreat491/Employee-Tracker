@@ -236,4 +236,3 @@ function exitApp() {
   createConnection.end();
 }
 
-
