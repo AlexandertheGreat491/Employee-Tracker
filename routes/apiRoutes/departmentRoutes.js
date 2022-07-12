@@ -122,3 +122,4 @@ router.get("/departments", (req, res) => {
     });
   });
   
+  module.exports = router;
