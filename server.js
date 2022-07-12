@@ -251,6 +251,34 @@ app.delete("/api/employee/:id", (req, res) => {
   });
 });
 
+//route to update employee
+app.put("/api/employees/:id", (req, res) => {
+  const errors = inputCheck(req.body, "employee_id");
+  if (errors) {
+    res.status(400).json({ error: errors });
+    return;
+  }
+  const sql = `UPDATE departments SET employee_id = ?
+               WHERE id = ?`;
+  const params = [req.body.deparments_id, req.params.id];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      // This will check if a record was found.
+    } else if (!result.affectedRows) {
+      res.json({
+        message: "Employee not found",
+      });
+    } else {
+      res.json({
+        message: "success",
+        data: req.body,
+        changes: result.affectedRows,
+      });
+    }
+  });
+});
+
 // The default response for any other request.
 app.use((req, res) => {
   res.status(404).end();
