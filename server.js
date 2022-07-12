@@ -170,6 +170,7 @@ function addEmployee() {
 
 // add a department to the database
 function addDepartment() {
+  
   inquirer
     .prompt([
       {
