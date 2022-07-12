@@ -195,6 +195,22 @@ app.put("/api/department/:id", (req, res) => {
   });
 });
 
+//employees routes
+//route for all employees
+app.get("/api/employees", (req, res) => {
+  const sql = `SELECT * FROM EMPLOYEES`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: rows,
+    });
+  });
+});
+
 // The default response for any other request.
 app.use((req, res) => {
   res.status(404).end();
