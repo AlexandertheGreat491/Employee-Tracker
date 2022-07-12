@@ -7,7 +7,7 @@ const inputCheck = require('../../utils/inputCheck');
 //departments/department routes
 
 //All departments
-app.get("/api/departments", (req, res) => {
+router.get("/departments", (req, res) => {
     const sql = `SELECT * FROM departments.*, roles.name
                   AS role_name
                   FROM departments
@@ -27,7 +27,7 @@ app.get("/api/departments", (req, res) => {
   });
   
   //GET a single department
-  app.get("/api/department/:id", (req, res) => {
+  router.get("/department/:id", (req, res) => {
     const sql = `SELECT * FROM departments.*, roles.name
                  AS role_name
                  FROM departments
@@ -49,7 +49,7 @@ app.get("/api/departments", (req, res) => {
   });
   
   //Delete a department
-  app.delete("/api/department/:id", (req, res) => {
+  router.delete("/department/:id", (req, res) => {
     const sql = `DELETE FROM departments WHERE ID = ?`;
     const params = [req.params.id];
   
@@ -71,7 +71,7 @@ app.get("/api/departments", (req, res) => {
   });
   
   //Create a department
-  app.post("/api/department", ({ body }, res) => {
+  router.post("/department", ({ body }, res) => {
     const errors = inputCheck(body, "id", "name");
     if (errors) {
       res.status(400).json({ error: errors });
@@ -95,7 +95,7 @@ app.get("/api/departments", (req, res) => {
   });
   
   // Update a department route
-  app.put("/api/department/:id", (req, res) => {
+  router.put("/department/:id", (req, res) => {
     const errors = inputCheck(req.body, "departments_id");
     if (errors) {
       res.status(400).json({ error: errors });
