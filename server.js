@@ -194,8 +194,11 @@ function addDepartment() {
 
 // add a role to the database
 function addRole() {
-  createConnection.query("SELECT * FROM department", function (err, res) {
+  createConnection.query(query1, function (err, res) {
     if (err) throw err;
+
+    //data prints in terminal when retrieved
+    console.table(res);
 
     inquirer
       .prompt([

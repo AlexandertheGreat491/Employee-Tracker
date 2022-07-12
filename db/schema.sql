@@ -4,15 +4,6 @@ CREATE DATABASE employee;
 USE employee;
 
 
-CREATE TABLE employee(
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  first_name VARCHAR(30),
-  last_name VARCHAR(30),
-  role_id INTEGER,
-  manager_id INTEGER,
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE department (
     id INT NOT NULL AUTO_INCREMENT,
     department_name VARCHAR(30) NOT NULL,
@@ -26,6 +17,19 @@ CREATE TABLE role (
     department_id INTEGER,
     PRIMARY KEY (id)
 );
+
+
+CREATE TABLE employee (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(30),
+  last_name VARCHAR(30),
+  role_id INTEGER,
+  manager_id INTEGER,
+  PRIMARY KEY (id)
+);
+
+
+
 
 
 
