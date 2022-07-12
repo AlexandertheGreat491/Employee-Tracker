@@ -10,7 +10,7 @@ VALUES
 ("Administration");
 
 /*role table values*/
-INSERT INTO roles (title, salary, department_id)
+INSERT INTO role (title, salary, department_id)
 VALUES
 ('Lead Engineer', 100000, 2),
 ('Software Engineer', 80000, 2),
@@ -22,7 +22,7 @@ VALUES
 ('Chief Executive Officer', 190000, 5);
 
 /*employee table values*/
-INSERT INTO employees (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
 ('John', 'Doe', 1, 8),
 ('Mike', 'Chan', 2, 1),
