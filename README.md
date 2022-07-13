@@ -2,16 +2,26 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+The goal of this project was to create an app that would enable a business owner to effectively track the roles, departments, titles, and salaries of their employees, as well as adding roles, departments, and employees. I learned how to use JavaScript with MySQL to create an app that can run in the terminal, as well as how to create tables in a MySQL database.
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+Please use the following steps to install the app on your local computer:
+
+Step 1: Ensure that Node.js and MySQL are installed on your local computer.
+
+Step 2: Navigate to the [Public GitHub Repository](https://github.com/AlexandertheGreat491/Employee-Tracker.git) for this app, fork the repository, and then clone the code to your local computer.
+
+Step 3: Open the folder in your code editor and open two terminals. Use one terminal for MySQL and the other for project commands. Ensure that you are signed into MySQL in one of the terminals.
+
+Step 4: In the server.js file under const createConnection you will need to change the MySQL username and password to your MySQL username and password.
+
+Step 5: In the terminal, while at the project's root directory run source db/schema.sql and then run db/seeds.sql. This should create the employee database, create the tables, and add values to those tables.
+
+Step 6: Now you should be ready to run the app! In your terminal run:
+node server.js
+
+Step 7: You will be presented with a menu from which you can perform a variety of functions within the app, access tables from the employee database, and add information to those tables.
 
 ## Usage
 
