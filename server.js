@@ -1,9 +1,8 @@
+//makes the prompts and tables from the database run in the app
 //imported modules
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-
-
 
 //Connect to the database
 const createConnection = mysql.createConnection(
@@ -14,19 +13,21 @@ const createConnection = mysql.createConnection(
     password: "Winston123@$",
     database: "employee",
   },
+  //this message will appear once connected to the database
   console.log("Connected to the employee database.")
-  
 );
 
 // connects to sql server and sql database
 createConnection.connect(function (err) {
   if (err) throw err;
+  //this lets the user know that they are connected to the server and the database
+  //user must make sure that their mysql info is in this file
+  console.log("You are now connected to the server and the database!");
   choices();
 });
 
-
-
 // prompts user with list of options to choose from
+// this function serves as the main menu for the app
 function choices() {
   inquirer
     .prompt({
@@ -80,6 +81,7 @@ function choices() {
 }
 
 // view all employees in the database
+// when "View All Employees" option selected while running the app
 function viewEmployees() {
   const query = "SELECT * FROM employee";
   createConnection.query(query, function (err, res) {
@@ -91,6 +93,7 @@ function viewEmployees() {
 }
 
 // view all departments in the database
+// when the "View All Departments" option is selected while running the app
 function viewDepartments() {
   const query = "SELECT * FROM department";
   createConnection.query(query, function (err, res) {
@@ -101,6 +104,7 @@ function viewDepartments() {
 }
 
 // view all roles in the database
+// when the "View All Roles" option is selected while running the app
 function viewRoles() {
   const query = "SELECT * FROM role";
   createConnection.query(query, function (err, res) {
@@ -111,6 +115,7 @@ function viewRoles() {
 }
 
 // add an employee to the database
+// when "Add an employee" is selected  while running the app
 function addEmployee() {
   createConnection.query("SELECT * FROM role", function (err, res) {
     if (err) throw err;
@@ -171,8 +176,8 @@ function addEmployee() {
 }
 
 // add a department to the database
+// when the "Add a department" option is selected while running the app
 function addDepartment() {
-
   inquirer
     .prompt([
       {
@@ -197,59 +202,63 @@ function addDepartment() {
 }
 
 // add a role to the database
+// when the "Add a role" option is selected while running the app
 function addRole() {
-  createConnection.query('SELECT * FROM department', function(err, res) {
-      if (err) throw err;
-  
-      inquirer 
+  createConnection.query("SELECT * FROM department", function (err, res) {
+    if (err) throw err;
+
+    inquirer
       .prompt([
-          {
-              name: 'new_role',
-              type: 'input', 
-              message: "What new role would you like to add?"
+        {
+          name: "new_role",
+          type: "input",
+          message: "What new role would you like to add?",
+        },
+        {
+          name: "salary",
+          type: "input",
+          message: "What is the salary of this role? (Enter a number)",
+        },
+        {
+          name: "Department",
+          type: "list",
+          choices: function () {
+            const deptArry = [];
+            for (let i = 0; i < res.length; i++) {
+              deptArry.push(res[i].name);
+            }
+            return deptArry;
           },
+        },
+      ])
+      .then(function (answer) {
+        let department_id;
+        for (let a = 0; a < res.length; a++) {
+          if (res[a].name == answer.Department) {
+            department_id = res[a].id;
+          }
+        }
+
+        createConnection.query(
+          "INSERT INTO role SET ?",
           {
-              name: 'salary',
-              type: 'input',
-              message: 'What is the salary of this role? (Enter a number)'
+            title: answer.new_role,
+            salary: answer.salary,
+            department_id: department_id,
           },
-          {
-              name: 'Department',
-              type: 'list',
-              choices: function() {
-                  const deptArry = [];
-                  for (let i = 0; i < res.length; i++) {
-                  deptArry.push(res[i].name);
-                  }
-                  return deptArry;
-              },
+          function (err, res) {
+            if (err) throw err;
+            console.log("Your new role has been added!");
+            console.table("All Roles:", res);
+            choices();
           }
-      ]).then(function (answer) {
-          let department_id;
-          for (let a = 0; a < res.length; a++) {
-              if (res[a].name == answer.Department) {
-                  department_id = res[a].id;
-              }
-          }
-  
-          createConnection.query(
-              'INSERT INTO role SET ?',
-              {
-                  title: answer.new_role,
-                  salary: answer.salary,
-                  department_id: department_id
-              },
-              function (err, res) {
-                  if(err)throw err;
-                  console.log('Your new role has been added!');
-                  console.table('All Roles:', res);
-                  choices();
-              })
-      })
-  })
-};
+        );
+      });
+  });
+}
 
 // update a role in the database
+// when the "Update employee role" option is selected while running the app
 function updateRole() {
   createConnection.query("SELECT * FROM employee", function (err, result) {
     if (err) throw err;
@@ -320,9 +329,8 @@ function updateRole() {
   });
 }
 
-
-
 // exit the app
+// when the "EXIT" option is selected while running the app
 function exitApp() {
   createConnection.end();
 }
