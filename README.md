@@ -36,6 +36,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 Collaborators:
 
+[Alex Van Dyke](https://github.com/AlexandertheGreat491)
 
 Tutorials:
 
