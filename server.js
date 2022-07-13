@@ -3,6 +3,8 @@ const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 
+
+
 //Connect to the database
 const createConnection = mysql.createConnection(
   {
@@ -170,7 +172,7 @@ function addEmployee() {
 
 // add a department to the database
 function addDepartment() {
-  
+
   inquirer
     .prompt([
       {
@@ -180,6 +182,7 @@ function addDepartment() {
       },
     ])
     .then(function (answer) {
+      console.log(answer);
       createConnection.query("INSERT INTO department SET ?", {
         name: answer.newDepartment,
       });

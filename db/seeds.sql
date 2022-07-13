@@ -1,7 +1,7 @@
 USE employee;
 
 /*department table values */
-INSERT INTO department (department_name)
+INSERT INTO department (name)
 VALUES
 ('Sales'),
 ('Engineering'),
