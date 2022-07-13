@@ -25,13 +25,11 @@ Step 7: You will be presented with a menu from which you can perform a variety o
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+Please view the walkthrough video to see how the app should function when it is run on your local computer.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+---------Add in walkthrough video link-----------
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+
 
 ## Credits
 
