@@ -27,8 +27,7 @@ Step 7: You will be presented with a menu from which you can perform a variety o
 
 Please view the walkthrough video after following the Installation instructions, to see how the app should function when it is run on your local computer.
 
----------Add in walkthrough video link-----------
-
+[Employee Tracker App Walkthrough Video](https://vimeo.com/730027503)
 
 
 ## Credits
